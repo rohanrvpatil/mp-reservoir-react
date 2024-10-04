@@ -40,7 +40,7 @@ const App = () => {
         <tbody>
           {tableData ? (
             Array.from(tableData.querySelectorAll("tr"))
-              .slice(5) // Skip the first five rows (headers)
+              .slice(4) // Skip the first five rows (headers)
               .map((row, index) => (
                 <tr key={index}>
                   {Array.from(row.querySelectorAll("td")).map(
