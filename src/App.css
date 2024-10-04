@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.table-container {
+  font-family: "Inter", sans-serif;
+  display: flex; /* Use quotes and add a fallback font */
+}
+
+.custom-table {
+  width: 100%; /* Make the table take full width */
+  border-collapse: collapse; /* Ensures borders are collapsed */
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #d0cece; /* Add border to cells */
+  padding: 8px; /* Padding for cells */
+  text-align: left; /* Text alignment */
+}
+
+.custom-table th {
+  background-color: #d0cece; /* Optional: background color for header */
+  font-weight: bold; /* Optional: bold text for header */
+  text-align: center;
+}
+
+/* Spinner styling */
+.spinner {
+  display: flex;
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 180px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
