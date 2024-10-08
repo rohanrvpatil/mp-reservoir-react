@@ -2,22 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "./package.json",
-      "use": "@vercel/static-build",
+      "src": "package.json",
+      "use": "@vercel/node",
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "src/server.ts",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/src/server.ts" },
+    {
+      "src": "/api/(.*)",
+      "dest": "https://mp-reservoir-react-f3gzsqy1x-rohan-patils-projects-f1740550.vercel.app"
+    },
     { "src": "/(.*)", "dest": "/" }
-  ],
-  "env": {
-    "VITE_BACKEND_URL": "https://mp-reservoir-react-f3gzsqy1x-rohan-patils-projects-f1740550.vercel.app"
-  }
+  ]
 }
