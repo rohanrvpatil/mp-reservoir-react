@@ -8,7 +8,7 @@ const PORT = 3000;
 
 const corsOptions = {
   origin:
-    "https://mp-reservoir-react-f3gzsqy1x-rohan-patils-projects-f1740550.vercel.app", // Replace with your frontend's Vercel URL
+    "https://mp-reservoir-react-2y0tu06p2-rohan-patils-projects-f1740550.vercel.app", // Replace with your frontend's Vercel URL
   credentials: true,
 };
 app.use(cors(corsOptions));

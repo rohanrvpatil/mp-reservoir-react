@@ -12,7 +12,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://mp-reservoir-react-f3gzsqy1x-rohan-patils-projects-f1740550.vercel.app"
+      "dest": "https://mp-reservoir-react-2y0tu06p2-rohan-patils-projects-f1740550.vercel.app"
     },
     { "src": "/(.*)", "dest": "/" }
   ]
