@@ -7,7 +7,9 @@ const App = () => {
   const [tableData, setTableData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/reservoir-water-level")
+    const apiUrl = process.env.VITE_BACKEND_URL || "http://localhost:3000";
+
+    fetch(`${apiUrl}/api/reservoir-water-level`)
       .then((response) => response.text())
       .then((data) => {
         const parser = new DOMParser();
