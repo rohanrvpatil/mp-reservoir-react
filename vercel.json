@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "vite.config.ts",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "src/server.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/src/server.ts" },
+    { "src": "/(.*)", "dest": "/" }
+  ],
+  "env": {
+    "VITE_BACKEND_URL": "https://mp-reservoir-react-f3gzsqy1x-rohan-patils-projects-f1740550.vercel.app"
+  }
+}

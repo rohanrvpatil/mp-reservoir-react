@@ -6,8 +6,12 @@ import axios from "axios"; // Import axios
 const app = express();
 const PORT = 3000;
 
-// Use CORS middleware
-app.use(cors());
+const corsOptions = {
+  origin:
+    "https://mp-reservoir-react-f3gzsqy1x-rohan-patils-projects-f1740550.vercel.app", // Replace with your frontend's Vercel URL
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.get("/api/reservoir-water-level", async (req, res) => {
   const loginUrl = "http://eims1.mpwrd.gov.in/fcmreport/control/floodreport"; // URL to initiate a session
