@@ -11,9 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@vercel/node": "^3.2.19",
+    "@vercel/node": "^2.10.3",
     "axios": "^1.7.7",
-    "cors": "^2.8.5",
     "express": "^4.21.0"
   },
   "devDependencies": {
