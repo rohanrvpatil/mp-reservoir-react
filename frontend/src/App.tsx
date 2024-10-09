@@ -10,7 +10,7 @@ const App = () => {
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    const apiUrl = "https://mp-reservoir-react-backend-po5ru0hgk.vercel.app";
+    const apiUrl = "https://mp-reservoir-react-backend.vercel.app";
 
     fetch(`${apiUrl}/reservoir-water-level`)
       .then((response) => response.text())
