@@ -13,14 +13,18 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.json());
 
-app.get("/reservoir-water-level", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://mp-reservoir-react-frontend.vercel.app"
-  ); // Specify allowed origin
+  );
+  next();
+});
+app.use(express.json());
+
+app.get("/reservoir-water-level", async (req, res) => {
   const loginUrl = "http://eims1.mpwrd.gov.in/fcmreport/control/floodreport"; // URL to initiate a session
   const dataUrl =
     "http://eims1.mpwrd.gov.in/fcmreport/control/reservoirWaterLevel"; // URL to fetch the data
@@ -56,11 +60,6 @@ app.get("/reservoir-water-level", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Credentials", "true"); // Allow credentials
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://mp-reservoir-react-frontend.vercel.app"
-  ); // Specify allowed origin
   res.json("Hello World");
 });
 
