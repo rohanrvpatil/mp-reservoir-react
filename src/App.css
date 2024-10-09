@@ -12,7 +12,7 @@
 
 .custom-table th,
 .custom-table td {
-  border: 1px solid #d0cece; /* Add border to cells */
+  border: 1px solid black; /* Add border to cells */
   padding: 8px; /* Padding for cells */
   text-align: left; /* Text alignment */
 }
