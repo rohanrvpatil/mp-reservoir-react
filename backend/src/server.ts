@@ -6,7 +6,14 @@ import axios from "axios"; // Import axios
 const app = express();
 const PORT = 3000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [""],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+// app.use(express.json());
 
 app.get("/reservoir-water-level", async (req, res) => {
   const loginUrl = "http://eims1.mpwrd.gov.in/fcmreport/control/floodreport"; // URL to initiate a session
