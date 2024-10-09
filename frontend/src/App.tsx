@@ -12,7 +12,10 @@ const App = () => {
   useEffect(() => {
     const apiUrl = "https://mp-reservoir-react-backend.vercel.app";
 
-    fetch(`${apiUrl}/reservoir-water-level`)
+    fetch(`${apiUrl}/reservoir-water-level`, {
+      method: "GET",
+      credentials: "include", // This allows sending cookies
+    })
       .then((response) => response.text())
       .then((data) => {
         const parser = new DOMParser();
