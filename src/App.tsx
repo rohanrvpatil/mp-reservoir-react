@@ -7,7 +7,7 @@ const App = () => {
   const [tableData, setTableData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const apiUrl = "https://mp-reservoir-react-backend-oar9hxhru.vercel.app";
+    const apiUrl = "https://mp-reservoir-react-backend-hm9rzo1nd.vercel.app/";
 
     fetch(`${apiUrl}/reservoir-water-level`)
       .then((response) => response.text())
