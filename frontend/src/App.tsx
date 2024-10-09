@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 import TableHeader from "./TableHeader"; // Import the TableHeader component
 import "./App.css"; // Import your CSS file
@@ -6,8 +7,10 @@ import "./App.css"; // Import your CSS file
 const App = () => {
   const [tableData, setTableData] = useState<HTMLElement | null>(null);
 
+  axios.defaults.withCredentials = true;
+
   useEffect(() => {
-    const apiUrl = "https://mp-reservoir-react-backend-hm9rzo1nd.vercel.app/";
+    const apiUrl = "https://mp-reservoir-react-backend.vercel.app/";
 
     fetch(`${apiUrl}/reservoir-water-level`)
       .then((response) => response.text())
