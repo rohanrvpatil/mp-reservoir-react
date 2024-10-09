@@ -14,7 +14,7 @@ const App = () => {
 
     fetch(`${apiUrl}/reservoir-water-level`, {
       method: "GET",
-      credentials: "include", // This allows sending cookies
+      mode: "no-cors", // This allows sending cookies
     })
       .then((response) => response.text())
       .then((data) => {
