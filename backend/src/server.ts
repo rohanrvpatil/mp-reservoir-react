@@ -8,8 +8,7 @@ const PORT = 3000;
 
 app.use(
   cors({
-    origin:
-      "https://mp-reservoir-react-fr-git-238454-rohan-patils-projects-f1740550.vercel.app",
+    origin: "https://www.mp-reservoir-react-frontend-fmrr00r2t.vercel.app",
   })
 );
 app.use(express.json());
