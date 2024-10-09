@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-app.get("/reservoir-water-level", async (req, res) => {
+app.get("/api/reservoir-water-level", async (req, res) => {
   const loginUrl = "http://eims1.mpwrd.gov.in/fcmreport/control/floodreport"; // URL to initiate a session
   const dataUrl =
     "http://eims1.mpwrd.gov.in/fcmreport/control/reservoirWaterLevel"; // URL to fetch the data
@@ -59,7 +59,7 @@ app.get("/reservoir-water-level", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/api/", (req, res) => {
   res.json("Hello World");
 });
 

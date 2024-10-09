@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const apiUrl = "https://mp-reservoir-react-backend.vercel.app";
 
-    fetch(`${apiUrl}/reservoir-water-level`, {
+    fetch(`${apiUrl}/api/reservoir-water-level`, {
       method: "GET",
       mode: "no-cors", // This allows sending cookies
     })
