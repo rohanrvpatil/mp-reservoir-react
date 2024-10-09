@@ -7,11 +7,11 @@ const App = () => {
   const [tableData, setTableData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const apiUrl = "https://mp-reservoir-react-backend.vercel.app";
+    const apiUrl = "http://localhost:3000";
 
     fetch(`${apiUrl}/api/reservoir-water-level`, {
       method: "GET",
-      mode: "no-cors", // This allows sending cookies
+      credentials: "include", // This allows sending cookies
     })
       .then((response) => response.text())
       .then((data) => {
@@ -59,7 +59,11 @@ const App = () => {
                 </tr>
               ))
           ) : (
-            <div className="spinner"></div>
+            <tr>
+              <td colSpan={3}>
+                <div className="spinner"></div>{" "}
+              </td>
+            </tr>
           )}
         </tbody>
       </table>

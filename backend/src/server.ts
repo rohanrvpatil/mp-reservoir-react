@@ -6,22 +6,7 @@ import axios from "axios"; // Import axios
 const app = express();
 const PORT = 3000;
 
-app.use(
-  cors({
-    origin: ["https://mp-reservoir-react-frontend.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://mp-reservoir-react-frontend.vercel.app"
-  );
-  next();
-});
+app.use(cors());
 app.use(express.json());
 
 app.get("/api/reservoir-water-level", async (req, res) => {
