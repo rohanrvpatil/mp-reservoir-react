@@ -8,7 +8,7 @@ const PORT = 3000;
 
 app.use(
   cors({
-    origin: "https://www.mp-reservoir-react-frontend-fmrr00r2t.vercel.app",
+    origin: "https://mp-reservoir-react-frontend-fmrr00r2t.vercel.app",
   })
 );
 app.use(express.json());
