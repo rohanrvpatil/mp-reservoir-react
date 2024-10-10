@@ -53,7 +53,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
   }
 });
 
-app.get("/api/", (req, res) => {
+app.get("/", (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.json("Hello World");
 });
