@@ -6,14 +6,14 @@ import axios from "axios"; // Import axios
 const app = express();
 const PORT = 3001;
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:5174", // Allow requests from this origin
-//     credentials: true, // Allow credentials (cookies, auth headers)
-//   })
-// );
+app.use(
+  cors({
+    origin: "https://mp-reservoir-react-frontend.vercel.app", // Allow requests from this origin
+    credentials: true, // Allow credentials (cookies, auth headers)
+  })
+);
 
-app.use(cors());
+// app.use(cors());
 
 app.use(express.json());
 
