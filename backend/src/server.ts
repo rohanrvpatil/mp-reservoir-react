@@ -17,6 +17,20 @@ app.use(
 
 // app.use(cors());
 
+app.options("/api/*", (req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://mp-reservoir-react-frontend.vercel.app"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(200); // Respond OK to the preflight request
+});
+
 app.use(express.json());
 
 app.get("/api/reservoir-water-level", async (req, res) => {
