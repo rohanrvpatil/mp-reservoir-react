@@ -17,6 +17,7 @@ const App = () => {
       .then((data) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, "text/html");
+        console.log(doc);
         const table = doc.querySelector("table");
 
         if (table) {
