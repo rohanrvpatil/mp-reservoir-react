@@ -8,7 +8,7 @@ const PORT = 3001;
 
 app.use(
   cors({
-    origin: "https://mp-reservoir-react-frontend.vercel.app/", // Allow requests from this origin
+    origin: "https://mp-reservoir-react-frontend.vercel.app", // Allow requests from this origin
     credentials: true, // Allow credentials (cookies, auth headers)
   })
 );
@@ -45,6 +45,10 @@ app.get("/api/reservoir-water-level", async (req, res) => {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
     };
     const response = await axios.get(dataUrl, { headers });
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://mp-reservoir-react-frontend.vercel.app"
+    );
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.send(response.data); // Send the HTML/text response to the frontend
   } catch (error) {
@@ -54,6 +58,10 @@ app.get("/api/reservoir-water-level", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://mp-reservoir-react-frontend.vercel.app"
+  );
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.send("Hello");
 });
