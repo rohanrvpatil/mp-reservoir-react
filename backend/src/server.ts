@@ -26,6 +26,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
   try {
     const initialResponse = await axios.get(loginUrl, {
       withCredentials: true,
+      timeout: 500000,
     });
     const setCookieHeader = initialResponse.headers["set-cookie"];
     if (!setCookieHeader) {
