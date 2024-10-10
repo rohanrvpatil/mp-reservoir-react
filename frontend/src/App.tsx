@@ -8,12 +8,32 @@ const App = () => {
 
   useEffect(() => {
     const apiUrl = "https://mp-reservoir-react-backend.vercel.app";
+    const timeoutDuration = 500000; // Set the timeout duration in milliseconds
+
+    // Create an AbortController instance
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    // Set a timeout to abort the fetch request
+    const timeoutId = setTimeout(() => {
+      controller.abort(); // Cancel the fetch request
+      console.error("Fetch request timed out.");
+    }, timeoutDuration);
 
     fetch(`${apiUrl}/api/reservoir-water-level`, {
       method: "GET",
       credentials: "include", // This allows sending cookies
+      signal, // Pass the signal to the fetch request
     })
-      .then((response) => response.text())
+      .then((response) => {
+        // Clear the timeout if the fetch request completes successfully
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
       .then((data) => {
         console.log(data);
         const parser = new DOMParser();
@@ -27,7 +47,19 @@ const App = () => {
           console.error("No table found in the response.");
         }
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        if (error.name === "AbortError") {
+          console.error("Fetch aborted due to timeout.");
+        } else {
+          console.error("Error:", error);
+        }
+      });
+
+    // Cleanup function to clear the timeout if the component unmounts
+    return () => {
+      clearTimeout(timeoutId);
+      controller.abort(); // Abort the fetch request if the component unmounts
+    };
   }, []);
 
   useEffect(() => {
