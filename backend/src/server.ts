@@ -55,7 +55,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
 
 app.get("/", (req, res) => {
   res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.json("Hello World");
+  res.send("Hello");
 });
 
 app.listen(PORT, () => {
