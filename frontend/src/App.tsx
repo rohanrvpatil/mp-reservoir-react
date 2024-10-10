@@ -9,11 +9,33 @@ const App = () => {
   useEffect(() => {
     const apiUrl = "https://mp-reservoir-react-backend.vercel.app";
 
-    fetch(`${apiUrl}/api/reservoir-water-level`, {
+    const fetchDataWithTimeout = async (
+      url: string,
+      options?: RequestInit,
+      timeout: number = 500000
+    ): Promise<Response> => {
+      // Create a promise that rejects after the timeout
+      const timeoutPromise = new Promise<Response>((_, reject) =>
+        setTimeout(() => reject(new Error("Request timed out")), timeout)
+      );
+
+      // Make the fetch request
+      const fetchPromise = fetch(url, options);
+
+      // Race between the fetch request and the timeout
+      return Promise.race([fetchPromise, timeoutPromise]);
+    };
+
+    fetchDataWithTimeout(`${apiUrl}/api/reservoir-water-level`, {
       method: "GET",
       credentials: "include", // This allows sending cookies
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
       .then((data) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(data, "text/html");
