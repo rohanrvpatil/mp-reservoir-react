@@ -8,7 +8,7 @@ const PORT = 3001;
 
 app.use(
   cors({
-    origin: "https://mp-reservoir-react-frontend.vercel.app", // Allow requests from this origin
+    origin: "https://mp-reservoir-react-frontend.vercel.app/", // Allow requests from this origin
     credentials: true, // Allow credentials (cookies, auth headers)
   })
 );
