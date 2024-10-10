@@ -7,7 +7,7 @@ const App = () => {
   const [tableData, setTableData] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const apiUrl = "http://localhost:3000";
+    const apiUrl = "http://localhost:3001";
 
     fetch(`${apiUrl}/api/reservoir-water-level`, {
       method: "GET",
@@ -59,8 +59,8 @@ const App = () => {
                 </tr>
               ))
           ) : (
-            <tr>
-              <td colSpan={3}>
+            <tr style={{ border: "none" }}>
+              <td colSpan={3} style={{ border: "none" }}>
                 <div className="spinner"></div>{" "}
               </td>
             </tr>

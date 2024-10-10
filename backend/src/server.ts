@@ -4,9 +4,17 @@ import cors from "cors";
 import axios from "axios"; // Import axios
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
+
+// app.use(
+//   cors({
+//     origin: "http://localhost:5174", // Allow requests from this origin
+//     credentials: true, // Allow credentials (cookies, auth headers)
+//   })
+// );
 
 app.use(cors());
+
 app.use(express.json());
 
 app.get("/api/reservoir-water-level", async (req, res) => {
@@ -37,6 +45,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
     };
     const response = await axios.get(dataUrl, { headers });
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     res.send(response.data); // Send the HTML/text response to the frontend
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -45,6 +54,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
 });
 
 app.get("/api/", (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.json("Hello World");
 });
 
