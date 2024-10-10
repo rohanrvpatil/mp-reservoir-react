@@ -30,6 +30,10 @@ app.options("/api/*", (req, res) => {
   res.sendStatus(200); // Respond OK to the preflight request
 });
 
+const axiosInstance = axios.create({
+  timeout: 500000, // Set the timeout to 10 seconds (10000 ms)
+});
+
 // API endpoint to fetch reservoir water level
 app.get("/api/reservoir-water-level", async (req, res) => {
   const loginUrl = "http://eims1.mpwrd.gov.in/fcmreport/control/floodreport";
@@ -37,7 +41,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
     "http://eims1.mpwrd.gov.in/fcmreport/control/reservoirWaterLevel";
 
   try {
-    const initialResponse = await axios.get(loginUrl, {
+    const initialResponse = await axiosInstance.get(loginUrl, {
       withCredentials: true,
     });
     const setCookieHeader = initialResponse.headers["set-cookie"];
