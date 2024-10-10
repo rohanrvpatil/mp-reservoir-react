@@ -6,42 +6,25 @@ import axios from "axios";
 const app = express();
 const PORT = 3001;
 
-// CORS options
-const corsOptions = {
-  origin: "https://mp-reservoir-react-frontend.vercel.app", // Allow requests from your frontend
-  credentials: true, // Allow credentials such as cookies or authorization headers
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Explicitly allow certain HTTP methods (optional)
-  allowedHeaders: "Content-Type, Authorization", // Allow custom headers (optional)
-};
-
-// Use CORS middleware
-app.use(cors(corsOptions));
-app.use(express.json());
-
-// Function to set CORS headers (if needed for specific responses)
-const setCORSHeaders = (res: Response) => {
-  res.setHeader("Access-Control-Allow-Origin", corsOptions.origin);
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-};
-
-// Handle preflight requests
-app.options("/api/*", (req, res) => {
-  setCORSHeaders(res);
-  res.sendStatus(200); // Respond OK to the preflight request
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://mp-reservoir-react-frontend.vercel.app"
+  ); // Your frontend URL
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
 });
 
-const axiosInstance = axios.create({
-  timeout: 500000, // Set the timeout to 10 seconds (10000 ms)
-});
+app.use(cors());
 
-// API endpoint to fetch reservoir water level
 app.get("/api/reservoir-water-level", async (req, res) => {
   const loginUrl = "http://eims1.mpwrd.gov.in/fcmreport/control/floodreport";
   const dataUrl =
     "http://eims1.mpwrd.gov.in/fcmreport/control/reservoirWaterLevel";
 
   try {
-    const initialResponse = await axiosInstance.get(loginUrl, {
+    const initialResponse = await axios.get(loginUrl, {
       withCredentials: true,
     });
     const setCookieHeader = initialResponse.headers["set-cookie"];
@@ -65,8 +48,7 @@ app.get("/api/reservoir-water-level", async (req, res) => {
 
     const response = await axios.get(dataUrl, { headers });
 
-    // Set CORS headers before sending the response
-    setCORSHeaders(res);
+    res.set("Content-Type", "text/html");
     res.send(response.data); // Send the HTML/text response to the frontend
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -76,7 +58,6 @@ app.get("/api/reservoir-water-level", async (req, res) => {
 
 // Simple GET route
 app.get("/", (req, res) => {
-  setCORSHeaders(res);
   res.send("Hello");
 });
 
