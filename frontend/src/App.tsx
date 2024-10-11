@@ -10,7 +10,7 @@ const App = () => {
     const fetchHtmlTable = async () => {
       try {
         const response = await fetch(
-          "https://github.com/rohanrvpatil/mp_reservoir_report/blob/main/response.html"
+          "https://raw.githubusercontent.com/rohanrvpatil/mp_reservoir_report/main/response.html"
         );
         const htmlText = await response.text();
 
