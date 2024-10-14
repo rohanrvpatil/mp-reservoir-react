@@ -1,6 +1,6 @@
 import React from "react";
 
-const PdfViewer: React.FC = () => {
+const Gujarat: React.FC = () => {
   return (
     <div style={{ display: "flex", height: "100vh", width: "100%" }}>
       <iframe
@@ -18,4 +18,4 @@ const PdfViewer: React.FC = () => {
   );
 };
 
-export default PdfViewer;
+export default Gujarat;

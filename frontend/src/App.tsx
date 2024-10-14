@@ -6,9 +6,7 @@ import "./App.css";
 // components
 import MadhyaPradesh from "./components/madhyaPradesh";
 import Maharashtra from "./components/maharashtra";
-// import Gujarat from "./components/gujarat";
-
-import PdfViewer from "./components/gujarat";
+import Gujarat from "./components/gujarat";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -85,7 +83,7 @@ const App = () => {
         <Maharashtra />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <PdfViewer />
+        <Gujarat />
       </TabPanel>
     </Box>
   );
