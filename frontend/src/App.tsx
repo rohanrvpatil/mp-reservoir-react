@@ -38,12 +38,9 @@ const TabPanel: React.FC<TabPanelProps> = ({
 const App = () => {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  const pdfUrl =
-    "https://wrd.maharashtra.gov.in/Upload/PDF/Today's-Storage-ReportEng-13-10-2024.pdf";
 
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
