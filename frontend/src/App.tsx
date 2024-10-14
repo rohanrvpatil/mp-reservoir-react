@@ -1,74 +1,96 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Box, Tabs, Tab } from "@mui/material";
 
-import TableHeader from "./TableHeader"; // Import the TableHeader component
-import "./App.css"; // Import your CSS file
+import "./App.css";
+
+// components
+import MadhyaPradesh from "./components/madhyaPradesh";
+import Maharashtra from "./components/maharashtra";
+// import Gujarat from "./components/gujarat";
+
+import PdfViewer from "./components/gujarat";
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+const TabPanel: React.FC<TabPanelProps> = ({
+  children,
+  value,
+  index,
+  ...other
+}) => {
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={1}>{children}</Box>}
+    </div>
+  );
+};
 
 const App = () => {
-  const [tableData, setTableData] = useState<HTMLElement | null>(null);
+  const [value, setValue] = useState(0);
 
-  useEffect(() => {
-    const fetchHtmlTable = async () => {
-      try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/rohanrvpatil/mp_reservoir_report/main/response.html"
-        );
-        const htmlText = await response.text();
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, "text/html");
-
-        const table = doc.querySelector("table");
-
-        setTableData(table);
-        // if (table) {
-        //   const rows = Array.from(table.querySelectorAll("tr"));
-
-        //   // Extract the table data
-        //   const parsedTableData: TableRow[] = rows.map((row) => {
-        //     const cols = Array.from(row.querySelectorAll("td, th"));
-        //     return cols.map((col) => col.textContent?.trim() || "");
-        //   });
-
-        //   setTableData(parsedTableData);
-        // }
-      } catch (error) {
-        console.error("Error fetching or parsing the HTML:", error);
-      }
-    };
-
-    fetchHtmlTable();
-  }, []);
+  const pdfUrl =
+    "https://wrd.maharashtra.gov.in/Upload/PDF/Today's-Storage-ReportEng-13-10-2024.pdf";
 
   return (
-    <div className="table-container">
-      <table className="custom-table">
-        {tableData && <TableHeader />}
-        <tbody>
-          {tableData ? (
-            Array.from(tableData.querySelectorAll("tr"))
-              .slice(4) // Skip the first five rows (headers)
-              .map((row, index) => (
-                <tr key={index}>
-                  {Array.from(row.querySelectorAll("td")).map(
-                    (cell, cellIndex) => (
-                      <td
-                        key={cellIndex}
-                        dangerouslySetInnerHTML={{ __html: cell.innerHTML }} // Preserve formatting
-                      />
-                    )
-                  )}
-                </tr>
-              ))
-          ) : (
-            <tr style={{ border: "none" }}>
-              <td colSpan={3} style={{ border: "none" }}>
-                <div className="spinner"></div>{" "}
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        aria-label="simple tabs example"
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab
+          label="Madhya Pradesh"
+          sx={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: "bold",
+            fontSize: 16,
+          }}
+        />
+        <Tab
+          label="Maharashtra"
+          sx={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: "bold",
+            fontSize: 16,
+          }}
+        />
+        <Tab
+          label="Gujarat"
+          sx={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: "bold",
+            fontSize: 16,
+          }}
+        />
+      </Tabs>
+
+      <TabPanel value={value} index={0}>
+        <MadhyaPradesh />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Maharashtra />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <PdfViewer />
+      </TabPanel>
+    </Box>
   );
 };
 
